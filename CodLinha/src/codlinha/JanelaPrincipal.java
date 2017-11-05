@@ -5,11 +5,32 @@
  */
 package codlinha;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+
 /**
  *
  * @author samot
  */
 public class JanelaPrincipal extends javax.swing.JFrame {
+
+    int minhaPorta;
+    String ipEnviar;
+    int portaEnviar;
+    boolean isServerSet;
+    boolean isRemoteSet;
 
     /**
      * Creates new form JanelaPrincipal
@@ -48,8 +69,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Comunicação através do 8B6T");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
-        jButton1.setText("conectar");
+        jButton1.setText("Ligar Servidor");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -60,9 +86,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jLabel2.setText("Meu ip é");
 
-        jLabel3.setText("Me conectar na porta");
+        jLabel3.setText("Minha porta");
 
-        jTextField1.setText("1035");
+        jTextField1.setText("8010");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -71,7 +97,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jLabel4.setText("Enviar dados para o ip");
 
-        jTextField2.setText("192.168.1.5");
+        jTextField2.setText("192.168.25.5");
 
         jButton2.setText("setar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +110,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jLabel6.setText("porta");
 
-        jTextField3.setText("1035");
+        jTextField3.setText("8010");
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -96,6 +122,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton3.setText("Enviar Mensagem");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jScrollPane2.setViewportView(jTextPane1);
 
@@ -134,11 +165,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGap(6, 6, 6)
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jButton2)))
                                 .addGap(0, 53, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
@@ -189,7 +220,50 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        isServerSet = true;
+        // setando minha porta
+        minhaPorta = Integer.parseInt(jTextField1.getText());
+        System.out.println("Minha porta = " + minhaPorta);
+
+        //servidor que recebe os dados
+        Thread servidor = new Thread() {
+            @Override
+            public void run() {
+
+                ServerSocket serverSocket = null;
+                DataInputStream clientData = null;
+
+                try {
+                    //cria socket
+                    serverSocket = new ServerSocket(minhaPorta);
+                    System.out.println("socket servidor: " + serverSocket.toString());
+                    //aceitando conexoes de clientes
+                    while (true) {
+                        Socket cliente = serverSocket.accept();
+                        System.out.println("socket cliente recebido: " + cliente.toString());
+                        String data = readAll(cliente);
+
+                        //descodifica a mensagem
+                        String msg = descodifica(data);
+                        mostraDadosRecebidos(msg);
+                    }
+
+                } catch (IOException e) {
+                    System.out.println(e);
+                } finally {
+                    try {
+                        //fechando
+                        serverSocket.close();
+                        clientData.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(JanelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+                //                
+            }
+        };
+        servidor.start();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -197,12 +271,43 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        isRemoteSet = true;
+        // setando ip e porta para enviar dados
+        ipEnviar = jTextField2.getText();
+        portaEnviar = Integer.parseInt(jTextField3.getText());
+        System.out.println("Enviar dados para " + ipEnviar + ":" + portaEnviar);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // Botao enviar mensagem
+        if (isRemoteSet && isServerSet) {
+            //pega o texto escrito e limpa a janela
+            String msg = jTextArea1.getText();
+            jTextArea1.setText("");
+
+            //codifica a mensagem
+            String msgC = codifica(msg);
+            //envia
+            enviarMensagem(msgC);
+        } else {
+            System.out.println("setar servidor e destino antes de enviar mensagem!!");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        //codigos executados assim que a janela aparece
+        System.out.println("Janela apareceu");
+
+        isRemoteSet = false;
+        isServerSet = false;
+        //mostrando meu ip
+        jLabel5.setText(meuIp());
+
+    }//GEN-LAST:event_formComponentShown
 
     /**
      * @param args the command line arguments
@@ -214,12 +319,15 @@ public class JanelaPrincipal extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+            //tema do sistema
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            //tema estilo java
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(JanelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -238,6 +346,73 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             }
         });
     }
+
+    // // minhas funcoes -------------------------------------------------------
+    private void enviarMensagem(String msg) {
+        //
+        System.out.println("Enviando para " + ipEnviar + ":" + portaEnviar + " a mensagem\n" + msg);
+        //configurando o socket de envio
+        Socket myClient = null;
+        DataOutputStream output = null;
+        try {
+            myClient = new Socket(ipEnviar, portaEnviar);
+            output = new DataOutputStream(myClient.getOutputStream());
+            //enviando
+            output.writeChars(msg);
+
+        } catch (IOException ex) {
+            Logger.getLogger(JanelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                output.close();
+                myClient.close();
+            } catch (IOException ex) {
+                Logger.getLogger(JanelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+    }
+
+    private String meuIp() {
+        //essa função retorna o ip atual dessa maquina
+        String ip = "";
+        try (final DatagramSocket socket = new DatagramSocket()) {
+            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+            ip = socket.getLocalAddress().getHostAddress();
+        } catch (SocketException ex) {
+            Logger.getLogger(JanelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(JanelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ip;
+    }
+
+    public String readAll(Socket socket) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line).append("\n");
+        }
+        return sb.toString();
+    }
+
+    public void mostraDadosRecebidos(String dados) {
+        String antigo = jTextPane1.getText();
+        jTextPane1.setText(antigo + "\n" + dados);
+    }
+
+    public String codifica(String dado) {
+        //Mensagem dever ser transformada em binário utilizando a tabela ASCII para dar correspondência, 0,5 pt.
+        return dado;
+    }
+
+    public String descodifica(String dado) {
+        return dado;
+    }
+
+    // -- fim das minhas funcoes ----------------------------------------------
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
