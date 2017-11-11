@@ -69,6 +69,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         textRcvd = new javax.swing.JTextPane();
         jLabel7 = new javax.swing.JLabel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Comunicação através do 8B6T");
@@ -131,9 +132,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        textRcvd.setEditable(false);
+        textRcvd.setDragEnabled(true);
         jScrollPane2.setViewportView(textRcvd);
 
-        jLabel7.setText("Mensagens Recebidas");
+        jLabel7.setText("                                                                       Mensagens Recebidas");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,28 +145,31 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(myIplabel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(202, 202, 202)
-                                .addComponent(jLabel1)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(buttonEnviarMsg)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(myIplabel))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(202, 202, 202)
+                                        .addComponent(jLabel1))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(labelServerPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(buttonLigarServidor))
-                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(buttonEnviarMsg)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -174,16 +180,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(buttonSetDestination)))
-                                .addGap(0, 53, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jScrollPane2))))
-                        .addGap(12, 12, 12))))
+                                .addGap(0, 90, Short.MAX_VALUE))
+                            .addComponent(jSeparator1))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,15 +207,21 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonSetDestination))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonEnviarMsg)
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buttonEnviarMsg)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -423,7 +428,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         String tmp = "";
         for (byte b : binaryData) {
             //transforma tipo byte em tipo string com 0s e 1s
-            tmp += Integer.toBinaryString(b);
+            tmp = Integer.toBinaryString(b);
             //adicionando padding de zeros no inicio
             while (tmp.length() < 8) {
                 tmp = "0" + tmp;
@@ -492,63 +497,84 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         return codificada;
     }
 
-    public String descodifica(String dado) {
+    public String descodifica(String dado) throws UnsupportedEncodingException {
         System.out.println(">descodificar |" + dado + "|");
 
         String descodificada = "";
-        String emBinario = "";
-        byte byteBinary;
+
+        byte byteBinary = (byte) 0b11111111;
         byte[] emBytes = null;
         ByteArrayOutputStream emBytesSteam = new ByteArrayOutputStream();
-        String codedByte = "";
-        int i = 0;
-        for (char s : dado.toCharArray()) {
-            i++;
-            codedByte += s;
-            if (i == 8) {
-                i = 0;
-                switch (codedByte) {
-                    // de 1 a 31, comandos
-                    // de 32 a 64, simbolos
-                    case "-++-00":   //espaco
-                        byteBinary = (byte) 00100000;
-                        break;
 
-                    //letras maiusculas
-                    //mais simbolos
-                    // letras minusculas
-                    case "+0+-00":   //letra a
-                        byteBinary = (byte) 01100001;
-                        System.out.println("descodificando letra a");
-                        break;
-                    case "+0+0-0":   //b
-                        byteBinary = (byte) 01100010;
-                        break;
-                    case "+0+00-":   //c
-                        byteBinary = (byte) 01100011;
-                        break;
-                    case "0++00-":   //d
-                        byteBinary = (byte) 01100100;
-                        break;
-                    case "++0-00":   //e
-                        byteBinary = (byte) 01100101;
-                        break;
-                    case "++00-0":   //f
-                        byteBinary = (byte) 01100110;
-                        break;
-                    case "++000-":   //g
-                        byteBinary = (byte) 01100111;
-                        break;
-                    //simbolos finais
+        //isso é uma regular expression que divide a string em partes de tamanho 6
+        String[] partes = dado.split(String.format("(?<=\\G.{%1$d})", 12));
 
-                    default:
-                        byteBinary = (byte) 00100000;   //espaco
-                }
+        for (String codedByte : partes) {
 
-                emBytesSteam.write(byteBinary);
-
-                codedByte = "";
+            String codedByteFixed = "";
+            
+            //retirando vazios da string
+            for (int i = 0; i < codedByte.length(); i += 2) {
+                codedByteFixed += codedByte.charAt(i);
             }
+
+            switch (codedByteFixed) {
+                // de 1 a 31, comandos
+                // de 32 a 64, simbolos
+                case "-++-00":   //espaco
+                    byteBinary = 0b00100000;
+                    break;
+
+                //letras maiusculas
+                //mais simbolos
+                // letras minusculas
+                case "+0+-00":   //letra a
+                    byteBinary = 0b01100001;
+//                    System.out.println("descodificando letra a");
+                    break;
+                case "+0+0-0":   //b
+                    byteBinary = 0b01100010;
+                    break;
+                case "+0+00-":   //c
+                    byteBinary = 0b01100011;
+                    break;
+                case "0++00-":   //d
+                    byteBinary = 0b01100100;
+                    break;
+                case "++0-00":   //e
+                    byteBinary = 0b01100101;
+                    break;
+                case "++00-0":   //f
+                    byteBinary = 0b01100110;
+                    break;
+                case "++000-":   //g
+                    byteBinary = 0b01100111;
+                    break;
+                //simbolos finais
+
+                default:
+                    byteBinary = 0b00100000;   //espaco
+                    
+                    ///codigos para debug abaixo
+                    System.out.println("Não entendi o codigo |" + codedByteFixed + "|");
+                    if (codedByteFixed.equals("+0+-00")) {
+                        System.out.println("é letra a");
+                    } else {
+                        System.out.println(codedByteFixed + " e " + "+0+-00" + " são " + codedByteFixed.compareTo("+0+-00"));
+                    }
+                    System.out.print("recebido: ");
+                    for (byte b : codedByteFixed.getBytes("UTF-8")) {
+                        System.out.println(Integer.toBinaryString(b));
+                    }
+                    System.out.println("letra a : ");
+                    for (byte b : "+0+-00".getBytes("UTF-8")) {
+                        System.out.println(Integer.toBinaryString(b));
+                    }
+                    ///
+            }
+
+            emBytesSteam.write(byteBinary);
+
         }
         emBytes = emBytesSteam.toByteArray();
         descodificada += new String(emBytes, UTF_8);
@@ -563,6 +589,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton buttonEnviarMsg;
     private javax.swing.JButton buttonLigarServidor;
     private javax.swing.JButton buttonSetDestination;
+    private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
