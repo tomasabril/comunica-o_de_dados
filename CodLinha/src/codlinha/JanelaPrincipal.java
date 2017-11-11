@@ -6,16 +6,19 @@
 package codlinha;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -48,23 +51,23 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        buttonLigarServidor = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        labelServerPort = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        buttonSetDestination = new javax.swing.JButton();
+        myIplabel = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton3 = new javax.swing.JButton();
+        textAreaMsgtoSend = new javax.swing.JTextArea();
+        buttonEnviarMsg = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        textRcvd = new javax.swing.JTextPane();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -75,10 +78,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Ligar Servidor");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonLigarServidor.setText("Ligar Servidor");
+        buttonLigarServidor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonLigarServidorActionPerformed(evt);
             }
         });
 
@@ -88,10 +91,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jLabel3.setText("Minha porta");
 
-        jTextField1.setText("8010");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        labelServerPort.setText("8010");
+        labelServerPort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                labelServerPortActionPerformed(evt);
             }
         });
 
@@ -99,14 +102,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jTextField2.setText("192.168.25.5");
 
-        jButton2.setText("setar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonSetDestination.setText("setar");
+        buttonSetDestination.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                buttonSetDestinationActionPerformed(evt);
             }
         });
 
-        jLabel5.setText("100.100.100.100");
+        myIplabel.setText("100.100.100.100");
 
         jLabel6.setText("porta");
 
@@ -117,18 +120,18 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        textAreaMsgtoSend.setColumns(20);
+        textAreaMsgtoSend.setRows(5);
+        jScrollPane1.setViewportView(textAreaMsgtoSend);
 
-        jButton3.setText("Enviar Mensagem");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        buttonEnviarMsg.setText("Enviar Mensagem");
+        buttonEnviarMsg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                buttonEnviarMsgActionPerformed(evt);
             }
         });
 
-        jScrollPane2.setViewportView(jTextPane1);
+        jScrollPane2.setViewportView(textRcvd);
 
         jLabel7.setText("Mensagens Recebidas");
 
@@ -144,7 +147,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5))
+                                .addComponent(myIplabel))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(202, 202, 202)
                                 .addComponent(jLabel1)))
@@ -156,11 +159,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(labelServerPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton1))
+                                        .addComponent(buttonLigarServidor))
                                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton3)
+                                    .addComponent(buttonEnviarMsg)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -170,7 +173,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton2)))
+                                        .addComponent(buttonSetDestination)))
                                 .addGap(0, 53, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,12 +193,12 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel5))
+                    .addComponent(myIplabel))
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(labelServerPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonLigarServidor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -204,7 +207,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(buttonSetDestination))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -212,17 +215,17 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(buttonEnviarMsg)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void buttonLigarServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLigarServidorActionPerformed
         isServerSet = true;
         // setando minha porta
-        minhaPorta = Integer.parseInt(jTextField1.getText());
+        minhaPorta = Integer.parseInt(labelServerPort.getText());
         System.out.println("Minha porta = " + minhaPorta);
 
         //servidor que recebe os dados
@@ -264,39 +267,45 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             }
         };
         servidor.start();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_buttonLigarServidorActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void labelServerPortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labelServerPortActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_labelServerPortActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void buttonSetDestinationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSetDestinationActionPerformed
         isRemoteSet = true;
         // setando ip e porta para enviar dados
         ipEnviar = jTextField2.getText();
         portaEnviar = Integer.parseInt(jTextField3.getText());
         System.out.println("Enviar dados para " + ipEnviar + ":" + portaEnviar);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_buttonSetDestinationActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void buttonEnviarMsgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEnviarMsgActionPerformed
         // Botao enviar mensagem
         if (isRemoteSet && isServerSet) {
             //pega o texto escrito e limpa a janela
-            String msg = jTextArea1.getText();
-            jTextArea1.setText("");
+            String msg = textAreaMsgtoSend.getText();
+            textAreaMsgtoSend.setText("");
 
             //codifica a mensagem
-            String msgC = codifica(msg);
+            String msgC = null;
+            try {
+                msgC = codifica(msg);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(JanelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             //envia
             enviarMensagem(msgC);
         } else {
             System.out.println("setar servidor e destino antes de enviar mensagem!!");
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_buttonEnviarMsgActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         //codigos executados assim que a janela aparece
@@ -305,7 +314,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         isRemoteSet = false;
         isServerSet = false;
         //mostrando meu ip
-        jLabel5.setText(meuIp());
+        myIplabel.setText(meuIp());
 
     }//GEN-LAST:event_formComponentShown
 
@@ -395,44 +404,180 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         while ((line = reader.readLine()) != null) {
             sb.append(line).append("\n");
         }
-        return sb.toString();
+        return sb.toString().trim();
     }
 
     public void mostraDadosRecebidos(String dados) {
-        String antigo = jTextPane1.getText();
-        jTextPane1.setText(antigo + "\n" + dados);
+        String antigo = textRcvd.getText();
+        textRcvd.setText(antigo + "\n" + dados);
     }
 
-    public String codifica(String dado) {
+    public String codifica(String dado) throws UnsupportedEncodingException {
         //Mensagem dever ser transformada em binário utilizando a tabela ASCII para dar correspondência, 0,5 pt.
-        return dado;
+        System.out.println(">codificar " + dado);
+
+        byte[] binaryData = dado.getBytes("UTF-8");
+
+        String codificada = "";
+        String emBinario = "";
+        String tmp = "";
+        for (byte b : binaryData) {
+            //transforma tipo byte em tipo string com 0s e 1s
+            tmp += Integer.toBinaryString(b);
+            //adicionando padding de zeros no inicio
+            while (tmp.length() < 8) {
+                tmp = "0" + tmp;
+            }
+            emBinario += tmp;
+            String codedTmp = "";
+            switch (tmp) {
+
+                // de 1 a 31, comandos
+                case "00000000":
+                    codedTmp = "-+00-+";
+                    break;
+                case "00000001":
+                    codedTmp = "0-+-+0";
+                    break;
+                case "00000010":
+                    codedTmp = "0-+0-+";
+                    break;
+                case "00000011":
+                    codedTmp = "0-++0-";
+                    break;
+                case "00000100":
+                    codedTmp = "-+0+0-";
+                    break;
+                case "00000101":
+                    codedTmp = "-0--+0";
+                    break;
+
+                // de 32 a 64, simbolos
+                case "00100000":    //espaco
+                    codedTmp = "-++-00";
+                    break;
+                //letras maiusculas
+                //mais simbolos
+                // letras minusculas
+                case "01100001":    //letra a
+                    codedTmp = "+0+-00";
+                    break;
+                case "01100010":    //letra b
+                    codedTmp = "+0+0-0";
+                    break;
+                case "01100011":    //letra c
+                    codedTmp = "+0+00-";
+                    break;
+                case "01100100":    //d
+                    codedTmp = "0++00-";
+                    break;
+                case "01100101":    //e
+                    codedTmp = "++0-00";
+                    break;
+                case "01100110":    //f
+                    codedTmp = "++00-0";
+                    break;
+                case "01100111":    //g
+                    codedTmp = "++000-";
+                    break;
+
+                //simbolos finais
+                default:
+                    codedTmp = "";
+            }
+            codificada += codedTmp;
+        }
+
+        System.out.println(">codificada " + codificada);
+        return codificada;
     }
 
     public String descodifica(String dado) {
-        return dado;
+        System.out.println(">descodificar |" + dado + "|");
+
+        String descodificada = "";
+        String emBinario = "";
+        byte byteBinary;
+        byte[] emBytes = null;
+        ByteArrayOutputStream emBytesSteam = new ByteArrayOutputStream();
+        String codedByte = "";
+        int i = 0;
+        for (char s : dado.toCharArray()) {
+            i++;
+            codedByte += s;
+            if (i == 8) {
+                i = 0;
+                switch (codedByte) {
+                    // de 1 a 31, comandos
+                    // de 32 a 64, simbolos
+                    case "-++-00":   //espaco
+                        byteBinary = (byte) 00100000;
+                        break;
+
+                    //letras maiusculas
+                    //mais simbolos
+                    // letras minusculas
+                    case "+0+-00":   //letra a
+                        byteBinary = (byte) 01100001;
+                        System.out.println("descodificando letra a");
+                        break;
+                    case "+0+0-0":   //b
+                        byteBinary = (byte) 01100010;
+                        break;
+                    case "+0+00-":   //c
+                        byteBinary = (byte) 01100011;
+                        break;
+                    case "0++00-":   //d
+                        byteBinary = (byte) 01100100;
+                        break;
+                    case "++0-00":   //e
+                        byteBinary = (byte) 01100101;
+                        break;
+                    case "++00-0":   //f
+                        byteBinary = (byte) 01100110;
+                        break;
+                    case "++000-":   //g
+                        byteBinary = (byte) 01100111;
+                        break;
+                    //simbolos finais
+
+                    default:
+                        byteBinary = (byte) 00100000;   //espaco
+                }
+
+                emBytesSteam.write(byteBinary);
+
+                codedByte = "";
+            }
+        }
+        emBytes = emBytesSteam.toByteArray();
+        descodificada += new String(emBytes, UTF_8);
+
+        System.out.println(">descodificado " + descodificada);
+        return descodificada;
     }
 
     // -- fim das minhas funcoes ----------------------------------------------
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton buttonEnviarMsg;
+    private javax.swing.JButton buttonLigarServidor;
+    private javax.swing.JButton buttonSetDestination;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextField labelServerPort;
+    private javax.swing.JLabel myIplabel;
+    private javax.swing.JTextArea textAreaMsgtoSend;
+    private javax.swing.JTextPane textRcvd;
     // End of variables declaration//GEN-END:variables
 
 }
