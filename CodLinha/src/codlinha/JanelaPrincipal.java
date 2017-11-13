@@ -70,6 +70,15 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         textRcvd = new javax.swing.JTextPane();
         jLabel7 = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
+        jScrollPane3 = new javax.swing.JScrollPane();
+        originalP = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        binarioP = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        codigoP = new javax.swing.JTextArea();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Comunicação através do 8B6T");
@@ -138,6 +147,24 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jLabel7.setText("                                                                       Mensagens Recebidas");
 
+        originalP.setColumns(20);
+        originalP.setRows(5);
+        jScrollPane3.setViewportView(originalP);
+
+        binarioP.setColumns(20);
+        binarioP.setRows(5);
+        jScrollPane4.setViewportView(binarioP);
+
+        codigoP.setColumns(20);
+        codigoP.setRows(5);
+        jScrollPane5.setViewportView(codigoP);
+
+        jLabel5.setText("original");
+
+        jLabel8.setText("binario");
+
+        jLabel9.setText("código");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -180,9 +207,23 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(buttonSetDestination)))
-                                .addGap(0, 90, Short.MAX_VALUE))
+                                .addGap(0, 203, Short.MAX_VALUE))
                             .addComponent(jSeparator1))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,19 +250,34 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                     .addComponent(buttonSetDestination))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(buttonEnviarMsg)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(buttonEnviarMsg)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap())
         );
 
         pack();
@@ -422,8 +478,16 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         System.out.println(">codificar " + dado);
 
         byte[] binaryData = dado.getBytes("cp437");
-        
-     
+        String bin = "";
+        for (byte b : binaryData) {
+            String b2 = Integer.toBinaryString(b);
+            if (b2.length() > 9) {
+                b2 = b2.substring(24);
+            }
+            bin = bin + b2;
+        }
+        originalP.setText(dado);
+        binarioP.setText(bin);
 
         String codificada = "";
         String emBinario = "";
@@ -431,13 +495,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         for (byte b : binaryData) {
             //transforma tipo byte em tipo string com 0s e 1s
             tmp = Integer.toBinaryString(b);
-            System.out.println("Eu entendi como" + tmp);
             //adicionando padding de zeros no inicio
             while (tmp.length() < 8) {
                 tmp = "0" + tmp;
             }
-            if (tmp.length()>9)
+            if (tmp.length() > 9) {
                 tmp = tmp.substring(24);
+            }
             emBinario += tmp;
             String codedTmp = "";
             switch (tmp) {
@@ -1233,6 +1297,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         }
 
         System.out.println(">codificada " + codificada);
+        codigoP.setText(codificada);
         return codificada;
     }
 
@@ -1240,6 +1305,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         System.out.println(">descodificar |" + dado + "|");
 
         String descodificada = "";
+        codigoP.setText(dado);
 
         byte byteBinary = (byte) 0b11111111;
         byte[] emBytes = null;
@@ -2065,32 +2131,48 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         }
         emBytes = emBytesSteam.toByteArray();
+        String bin = "";
+        for (byte b : emBytes) {
+            bin += Integer.toBinaryString(b);
+        }
+        binarioP.setText(bin);
+
         descodificada += new String(emBytes, "cp437");
 
         System.out.println(">descodificado " + descodificada);
+        originalP.setText(descodificada);
         return descodificada;
     }
 
     // -- fim das minhas funcoes ----------------------------------------------
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea binarioP;
     private javax.swing.JButton buttonEnviarMsg;
     private javax.swing.JButton buttonLigarServidor;
     private javax.swing.JButton buttonSetDestination;
+    private javax.swing.JTextArea codigoP;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField labelServerPort;
     private javax.swing.JLabel myIplabel;
+    private javax.swing.JTextArea originalP;
     private javax.swing.JTextArea textAreaMsgtoSend;
     private javax.swing.JTextPane textRcvd;
     // End of variables declaration//GEN-END:variables
