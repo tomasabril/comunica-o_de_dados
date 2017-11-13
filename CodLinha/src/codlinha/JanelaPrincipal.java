@@ -421,7 +421,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         //Mensagem dever ser transformada em binário utilizando a tabela ASCII para dar correspondência, 0,5 pt.
         System.out.println(">codificar " + dado);
 
-        byte[] binaryData = dado.getBytes("UTF-8");
+        byte[] binaryData = dado.getBytes("cp437");
+        
+     
 
         String codificada = "";
         String emBinario = "";
@@ -429,10 +431,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         for (byte b : binaryData) {
             //transforma tipo byte em tipo string com 0s e 1s
             tmp = Integer.toBinaryString(b);
+            System.out.println("Eu entendi como" + tmp);
             //adicionando padding de zeros no inicio
             while (tmp.length() < 8) {
                 tmp = "0" + tmp;
             }
+            if (tmp.length()>9)
+                tmp = tmp.substring(24);
             emBinario += tmp;
             String codedTmp = "";
             switch (tmp) {
@@ -441,97 +446,97 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 case "00000000": //NUL
                     codedTmp = "-+00-+";
                     break;
-case "00000001": //SOH
+                case "00000001": //SOH
                     codedTmp = "0-+-+0";
                     break;
-case "00000010": //STX
+                case "00000010": //STX
                     codedTmp = "0-+0-+";
                     break;
-case "00000011": //ETX
+                case "00000011": //ETX
                     codedTmp = "0-++0-";
                     break;
-case "00000100": //EOT
+                case "00000100": //EOT
                     codedTmp = "-+0+0-";
-                    break;					
-case "00000101": //ENQ
+                    break;
+                case "00000101": //ENQ
                     codedTmp = "+0--+0";
-                    break;					
-case "00000110": //ACK
+                    break;
+                case "00000110": //ACK
                     codedTmp = "+0-0-+";
-                    break;					
-case "00000111": //BEL
+                    break;
+                case "00000111": //BEL
                     codedTmp = "+0-+0-";
-                    break;					
-case "00001000": //BS
+                    break;
+                case "00001000": //BS
                     codedTmp = "-+00+-";
                     break;
-case "00001001": //HT
+                case "00001001": //HT
                     codedTmp = "0-++-0";
                     break;
-case "00001010": //LF
+                case "00001010": //LF
                     codedTmp = "0-+0+-";
                     break;
-case "00001011": //VT
+                case "00001011": //VT
                     codedTmp = "0-+-0+";
                     break;
-case "00001100": //FF
+                case "00001100": //FF
                     codedTmp = "-+0-0+";
-                    break;					
-case "00001101": //CR
+                    break;
+                case "00001101": //CR
                     codedTmp = "+0-+-0";
-                    break;					
-case "00001110": //SO
+                    break;
+                case "00001110": //SO
                     codedTmp = "+0-0+-";
-                    break;					
-case "00001111": //SI
+                    break;
+                case "00001111": //SI
                     codedTmp = "+0--0+";
-                    break;			
-case "00010000": //DLE
+                    break;
+                case "00010000": //DLE
                     codedTmp = "0--+0+";
                     break;
-case "00010001": //DC1
+                case "00010001": //DC1
                     codedTmp = "-0-0++";
                     break;
-case "00010010": //DC2
+                case "00010010": //DC2
                     codedTmp = "-0-+0+";
                     break;
-case "00010011": //DC3
+                case "00010011": //DC3
                     codedTmp = "-0-++0";
                     break;
-case "00010100": //DC4
+                case "00010100": //DC4
                     codedTmp = "0--++0";
-                    break;					
-case "00010101": //NAK
+                    break;
+                case "00010101": //NAK
                     codedTmp = "--00++";
-                    break;					
-case "00010110": //SYN
+                    break;
+                case "00010110": //SYN
                     codedTmp = "--0+0+";
-                    break;					
-case "00010111": //ETB
+                    break;
+                case "00010111": //ETB
                     codedTmp = "--0++0";
-                    break;					
-case "00011000": //CAN
+                    break;
+                case "00011000": //CAN
                     codedTmp = "-+0-+0";
                     break;
-case "00011001": //EM
+                case "00011001": //EM
                     codedTmp = "+-0-+0";
                     break;
-case "00011010": //SUB
+                case "00011010": //SUB
                     codedTmp = "-++-+0";
                     break;
-case "00011011": //ESC
+                case "00011011": //ESC
                     codedTmp = "+00-+0";
                     break;
-case "00011100": //FS
+                case "00011100": //FS
                     codedTmp = "+00+-0";
-                    break;					
-case "00011101": //GS
+                    break;
+                case "00011101": //GS
                     codedTmp = "-+++-0";
-                    break;					
-case "00011110": //RS
+                    break;
+                case "00011110": //RS
                     codedTmp = "+-0+-0";
-                    break;					
-case "00011111": //US
+                    break;
+                case "00011111": //US
                     codedTmp = "-+0+-0";
                     break;
 
@@ -539,697 +544,688 @@ case "00011111": //US
                 case "00100000": //space
                     codedTmp = "-++-00";
                     break;
-case "00100001": //!
+                case "00100001": //!
                     codedTmp = "+00+--";
                     break;
-case "00100010": //"
+                case "00100010": //"
                     codedTmp = "-+0-++";
                     break;
-case "00100011": //#
+                case "00100011": //#
                     codedTmp = "+-0-++";
                     break;
-case "00100100": //$
+                case "00100100": //$
                     codedTmp = "+-0+00";
-                    break;					
-case "00100101": //%
+                    break;
+                case "00100101": //%
                     codedTmp = "-+0+00";
-                    break;					
-case "00100110": //&
+                    break;
+                case "00100110": //&
                     codedTmp = "+00-00";
-                    break;					
-case "00100111": //'
+                    break;
+                case "00100111": //'
                     codedTmp = "-+++--";
-                    break;					
-case "00101000": //(
+                    break;
+                case "00101000": //(
                     codedTmp = "0++-0-";
                     break;
-case "00101001": //)
+                case "00101001": //)
                     codedTmp = "+0+0--";
                     break;
-case "00101010": //*
-					codedTmp = "+0+-0-";
+                case "00101010": //*
+                    codedTmp = "+0+-0-";
                     break;
-case "00101011": //+
+                case "00101011": //+
                     codedTmp = "+0+--0";
                     break;
-case "00101100": //`
+                case "00101100": //`
                     codedTmp = "0++--0";
-                    break;					
-case "00101101": //-
+                    break;
+                case "00101101": //-
                     codedTmp = "++00--";
-                    break;					
-case "00101110": //.
+                    break;
+                case "00101110": //.
                     codedTmp = "++0-0-";
-                    break;					
-case "00101111": // /
+                    break;
+                case "00101111": // /
                     codedTmp = "++0--0";
-                    break;					
-case "00110000": //0
+                    break;
+                case "00110000": //0
                     codedTmp = "+-00-+";
                     break;
-case "00110001": //1
+                case "00110001": //1
                     codedTmp = "0+--+0";
                     break;
-case "00110010": //2
+                case "00110010": //2
                     codedTmp = "0+-0-+";
                     break;
-case "00110011": //3
+                case "00110011": //3
                     codedTmp = "0+-+0-";
                     break;
-case "00110100": //4
+                case "00110100": //4
                     codedTmp = "+-0+0-";
-                    break;					
-case "00110101": //5
+                    break;
+                case "00110101": //5
                     codedTmp = "-0+-+0";
-                    break;					
-case "00110110": //6
+                    break;
+                case "00110110": //6
                     codedTmp = "-0+-+";
-                    break;					
-case "00110111": //7
+                    break;
+                case "00110111": //7
                     codedTmp = "-0++0-";
-                    break;					
-case "00111000": //8
+                    break;
+                case "00111000": //8
                     codedTmp = "+-00+-";
                     break;
-case "00111001": //9
+                case "00111001": //9
                     codedTmp = "0+-+-0";
                     break;
-case "00111010": //:
+                case "00111010": //:
                     codedTmp = "0+-0+-";
                     break;
-case "00111011": //;
+                case "00111011": //;
                     codedTmp = "0+--0+";
                     break;
-case "00111100": //<
+                case "00111100": //<
                     codedTmp = "+-0-0+";
-                    break;					
-case "00111101": //=
+                    break;
+                case "00111101": //=
                     codedTmp = "-0++-0";
-                    break;					
-case "00111110": //>
+                    break;
+                case "00111110": //>
                     codedTmp = "-0+0+-";
-                    break;					
-case "00111111": //?
+                    break;
+                case "00111111": //?
                     codedTmp = "-0+-0+";
-                    break;					
-case "01000000": //@
+                    break;
+                case "01000000": //@
                     codedTmp = "-00+0+";
                     break;
                 // de 65 a 90, letras maiusculas
-                    case "01000001": //A
+                case "01000001": //A
                     codedTmp = "0-00++";
                     break;
-case "01000010": //B
+                case "01000010": //B
                     codedTmp = "0-0+0+";
                     break;
-case "01000011": //C
+                case "01000011": //C
                     codedTmp = "0-0++0";
                     break;
-case "01000100": //D
+                case "01000100": //D
                     codedTmp = "-00++0";
-                    break;					
-case "01000101": //E
+                    break;
+                case "01000101": //E
                     codedTmp = "00-0++";
-                    break;					
-case "01000110": //F
+                    break;
+                case "01000110": //F
                     codedTmp = "00-+0+";
-                    break;					
-case "01000111": //G
+                    break;
+                case "01000111": //G
                     codedTmp = "00-++0";
-                    break;					
-case "01001000": //H
+                    break;
+                case "01001000": //H
                     codedTmp = "00+000";
                     break;
-case "01001001": //I
+                case "01001001": //I
                     codedTmp = "++-000";
                     break;
-case "01001010": //J
+                case "01001010": //J
                     codedTmp = "+-+000";
                     break;
-case "01001011": //K
+                case "01001011": //K
                     codedTmp = "-++000";
                     break;
-case "01001100": //L
+                case "01001100": //L
                     codedTmp = "0+-000";
-                    break;					
-case "01001101": //M
+                    break;
+                case "01001101": //M
                     codedTmp = "+0-000";
-                    break;					
-case "01001110": //N
+                    break;
+                case "01001110": //N
                     codedTmp = "0-+000";
-                    break;					
-case "01001111": //O
+                    break;
+                case "01001111": //O
                     codedTmp = "-0+000";
-                    break;				
-case "01010000": //P
+                    break;
+                case "01010000": //P
                     codedTmp = "+--+0+";
                     break;
-case "01010001": //Q
+                case "01010001": //Q
                     codedTmp = "-+-0++";
                     break;
-case "01010010": //R
+                case "01010010": //R
                     codedTmp = "-+-+0+";
                     break;
-case "01010011": //S
+                case "01010011": //S
                     codedTmp = "-+-++0";
                     break;
-case "01010100": //T
+                case "01010100": //T
                     codedTmp = "+--++0";
-                    break;					
-case "01010101": //U
+                    break;
+                case "01010101": //U
                     codedTmp = "--+0++";
-                    break;					
-case "01010110": //V
+                    break;
+                case "01010110": //V
                     codedTmp = "--++0+";
-                    break;					
-case "01010111": //W
-                    codedTmp = "--++00";
-                    break;					
-case "01011000": //X
+                    break;
+                case "01010111": //W
+                    codedTmp = "--+++0";
+                    break;
+                case "01011000": //X
                     codedTmp = "--0+++";
                     break;
-case "01011001": //Y
+                case "01011001": //Y
                     codedTmp = "-0-+++";
                     break;
-case "01011010": //Z
+                case "01011010": //Z
                     codedTmp = "0--+++";
                     break;
                 // de 91 a 96, mais simbolos
-                    case "01011011": //[
+                case "01011011": //[
                     codedTmp = "0--0++";
                     break;
-case "01011100": //\
+                case "01011100": //\
                     codedTmp = "+--0++";
-                    break;					
-case "01011101": //]
+                    break;
+                case "01011101": //]
                     codedTmp = "-000++";
-                    break;					
-case "01011110": //^
+                    break;
+                case "01011110": //^
                     codedTmp = "0+++--";
-                    break;					
-case "01011111": //_
+                    break;
+                case "01011111": //_
                     codedTmp = "0++-00";
                     break;
-case "01100000": //`
+                case "01100000": //`
                     codedTmp = "0++0-0";
                     break;
                 // de 97 a 122, letras minusculas
                 case "01100001": //a
                     codedTmp = "+0+-00";
                     break;
-case "01100010": //b
+                case "01100010": //b
                     codedTmp = "+0+0-0";
                     break;
-case "01100011": //c
+                case "01100011": //c
                     codedTmp = "+0+00-";
                     break;
-case "01100100": //d
+                case "01100100": //d
                     codedTmp = "0++00-";
-                    break;					
-case "01100101": //e
+                    break;
+                case "01100101": //e
                     codedTmp = "++0-00";
-                    break;					
-case "01100110": //f
+                    break;
+                case "01100110": //f
                     codedTmp = "++00-0";
-                    break;					
-case "01100111": //g
+                    break;
+                case "01100111": //g
                     codedTmp = "++000-";
-                    break;					
-case "01101000": //h
+                    break;
+                case "01101000": //h
                     codedTmp = "0++-+-";
                     break;
-case "01101001": //i
+                case "01101001": //i
                     codedTmp = "+0++--";
                     break;
-case "01101010": //j
-					codedTmp = "+0+-+-";
+                case "01101010": //j
+                    codedTmp = "+0+-+-";
                     break;
-case "01101011": //k
+                case "01101011": //k
                     codedTmp = "+0+--+";
                     break;
-case "01101100": //l
+                case "01101100": //l
                     codedTmp = "0++--+";
-                    break;					
-case "01101101": //m
+                    break;
+                case "01101101": //m
                     codedTmp = "++0+--";
-                    break;					
-case "01101110": //n
+                    break;
+                case "01101110": //n
                     codedTmp = "++0-+-";
-                    break;					
-case "01101111": //o
+                    break;
+                case "01101111": //o
                     codedTmp = "++0--+";
-                    break;					
-case "01110000": //p
+                    break;
+                case "01110000": //p
                     codedTmp = "000++-";
                     break;
-case "01110001": //q
+                case "01110001": //q
                     codedTmp = "000+-+";
                     break;
-case "01110010": //r
+                case "01110010": //r
                     codedTmp = "000-++";
                     break;
-case "01110011": //s
+                case "01110011": //s
                     codedTmp = "000+00";
                     break;
-case "01110100": //t
+                case "01110100": //t
                     codedTmp = "000+0-";
-                    break;					
-case "01110101": //u
+                    break;
+                case "01110101": //u
                     codedTmp = "000+-0";
-                    break;					
-case "01110110": //v
+                    break;
+                case "01110110": //v
                     codedTmp = "000-0+";
-                    break;					
-case "01110111": //w
+                    break;
+                case "01110111": //w
                     codedTmp = "000-+0";
-                    break;					
-case "01111000": //x
+                    break;
+                case "01111000": //x
                     codedTmp = "+++--0";
                     break;
-case "01111001": //y
+                case "01111001": //y
                     codedTmp = "+++-0-";
                     break;
-case "01111010": //z
+                case "01111010": //z
                     codedTmp = "+++0--";
                     break;
 
                 // de 123 a 127, simbolos finais
-                    case "01111011": //{
+                case "01111011": //{
                     codedTmp = "0++0--";
                     break;
-case "01111100": //|
+                case "01111100": //|
                     codedTmp = "-00-++";
-                    break;					
-case "01111101": //}
-                   codedTmp = "-00+00";
-                    break;					
-case "01111110": //~
+                    break;
+                case "01111101": //}
+                    codedTmp = "-00+00";
+                    break;
+                case "01111110": //~
                     codedTmp = "+---++";
-                    break;					
-case "01111111": //DEL
+                    break;
+                case "01111111": //DEL
                     codedTmp = "+--+00";
-                    break;	
-                    
+                    break;
+
                 //demais: tabela estendida
                 case "10000000":
                     codedTmp = "-00+-+";
                     break;
-case "10000001":
+                case "10000001":
                     codedTmp = "0-0-++";
                     break;
-case "10000010":
+                case "10000010":
                     codedTmp = "0-0+-+";
                     break;
-case "10000011": 
+                case "10000011":
                     codedTmp = "0-0++-";
                     break;
-case "10000100": 
+                case "10000100":
                     codedTmp = "-00++-";
-                    break;					
-case "10000101": 
+                    break;
+                case "10000101":
                     codedTmp = "00--++";
-                    break;					
-case "10000110": 
+                    break;
+                case "10000110":
                     codedTmp = "00-+-+";
-                    break;					
-case "10000111": 
+                    break;
+                case "10000111":
                     codedTmp = "00-++-";
-                    break;					
-case "10001000": 
+                    break;
+                case "10001000":
                     codedTmp = "-000+0";
                     break;
-case "10001001": 
+                case "10001001":
                     codedTmp = "0-0+00";
                     break;
-case "10001010": 
+                case "10001010":
                     codedTmp = "0-00+0";
                     break;
-case "10001011": 
+                case "10001011":
                     codedTmp = "0-000+";
                     break;
-case "10001100": 
+                case "10001100":
                     codedTmp = "-0000+";
-                    break;					
-case "10001101": 
+                    break;
+                case "10001101":
                     codedTmp = "00-+00";
-                    break;					
-case "10001110": 
+                    break;
+                case "10001110":
                     codedTmp = "00-0+0";
-                    break;					
-case "10001111": 
+                    break;
+                case "10001111":
                     codedTmp = "00-00+";
-                    break;									
-case "10010000": 
+                    break;
+                case "10010000":
                     codedTmp = "+--+-+";
                     break;
-case "10010001": 
+                case "10010001":
                     codedTmp = "-+--++";
                     break;
-case "10010010": 
+                case "10010010":
                     codedTmp = "-+-+-+";
                     break;
-case "10010011": 
+                case "10010011":
                     codedTmp = "-+-++-";
                     break;
-case "10010100": 
+                case "10010100":
                     codedTmp = "+--++-";
-                    break;					
-case "10010101": 
+                    break;
+                case "10010101":
                     codedTmp = "--+-++";
-                    break;					
-case "10010110": 
+                    break;
+                case "10010110":
                     codedTmp = "--++-+";
-                    break;					
-case "10010111": 
+                    break;
+                case "10010111":
                     codedTmp = "--+++-";
-                    break;					
-case "10011000": 
+                    break;
+                case "10011000":
                     codedTmp = "+--0+0";
                     break;
-case "10011001": 
+                case "10011001":
                     codedTmp = "-+-+00";
                     break;
-case "10011010": 
+                case "10011010":
                     codedTmp = "-+-0+0";
                     break;
-case "10011011": 
+                case "10011011":
                     codedTmp = "-+-00+";
                     break;
-case "10011100": 
+                case "10011100":
                     codedTmp = "+--00+";
-                    break;					
-case "10011101": 
+                    break;
+                case "10011101":
                     codedTmp = "--++00";
-					break;					
-case "10011110": 
+                    break;
+                case "10011110":
                     codedTmp = "--+0+0";
-                    break;					
-case "10011111": 
+                    break;
+                case "10011111":
                     codedTmp = "--+00+";
                     break;
-case "10100000": 
+                case "10100000":
                     codedTmp = "-++0-0";
                     break;
-case "10100001": 
+                case "10100001":
                     codedTmp = "+-+-00";
                     break;
-case "10100010": 
+                case "10100010":
                     codedTmp = "+-+0-0";
                     break;
-case "10100011": 
+                case "10100011":
                     codedTmp = "+-+00-";
                     break;
-case "10100100": 
+                case "10100100":
                     codedTmp = "-++00-";
-                    break;					
-case "10100101": 
+                    break;
+                case "10100101":
                     codedTmp = "++--00";
-                    break;					
-case "10100110": 
+                    break;
+                case "10100110":
                     codedTmp = "++-0-0";
-                    break;					
-case "10100111": 
+                    break;
+                case "10100111":
                     codedTmp = "++-00-";
-                    break;					
-case "10101000": 
+                    break;
+                case "10101000":
                     codedTmp = "-++-+-";
                     break;
-case "10101001": 
+                case "10101001":
                     codedTmp = "+-++--";
                     break;
-case "10101010": 
-					codedTmp = "+-+-+-";
+                case "10101010":
+                    codedTmp = "+-+-+-";
                     break;
-case "10101011": 
-                   codedTmp = "+-+--+";
+                case "10101011":
+                    codedTmp = "+-+--+";
                     break;
-case "10101100": 
+                case "10101100":
                     codedTmp = "-++--+";
-                    break;					
-case "10101101": 
+                    break;
+                case "10101101":
                     codedTmp = "++-+--";
-                    break;					
-case "10101110": 
+                    break;
+                case "10101110":
                     codedTmp = "++--+-";
-                    break;					
-case "10101111": 
+                    break;
+                case "10101111":
                     codedTmp = "++---+";
                     break;
-				
-					
-					
-					
-case "10110000": 
+
+                case "10110000":
                     codedTmp = "+000-0";
                     break;
-case "10110001": 
+                case "10110001":
                     codedTmp = "0+0-00";
                     break;
-case "10110010": 
+                case "10110010":
                     codedTmp = "0+00-0";
                     break;
-case "10110011": 
+                case "10110011":
                     codedTmp = "0+000-";
                     break;
-case "10110100": 
-					codedTmp = "-0000-";
-                    break;					
-case "10110101": 
+                case "10110100":
+                    codedTmp = "-0000-";
+                    break;
+                case "10110101":
                     codedTmp = "00+-00";
-                    break;					
-case "10110110": 
+                    break;
+                case "10110110":
                     codedTmp = "00+0-0";
-                    break;					
-case "10110111": 
+                    break;
+                case "10110111":
                     codedTmp = "00+00-";
-                    break;					
-case "10111000": 
+                    break;
+                case "10111000":
                     codedTmp = "+00-+-";
                     break;
-case "10111001": 
+                case "10111001":
                     codedTmp = "0+0+--";
                     break;
-case "10111010": 
-					codedTmp = "0+0-+-";
+                case "10111010":
+                    codedTmp = "0+0-+-";
                     break;
-case "10111011": 
+                case "10111011":
                     codedTmp = "0+0--+";
                     break;
-case "10111100": 
+                case "10111100":
                     codedTmp = "+00--+";
-                    break;					
-case "10111101": 
+                    break;
+                case "10111101":
                     codedTmp = "00++--";
-                    break;					
-case "10111110": 
+                    break;
+                case "10111110":
                     codedTmp = "00+-+-";
-                    break;					
-case "10111111": 
+                    break;
+                case "10111111":
                     codedTmp = "00+--+";
                     break;
-					
-case "11000000": 
+
+                case "11000000":
                     codedTmp = "-+0+-+";
                     break;
-case "11000001": 
+                case "11000001":
                     codedTmp = "0-+-++";
                     break;
-case "11000010": 
+                case "11000010":
                     codedTmp = "0-++-+";
                     break;
-case "11000011": 
+                case "11000011":
                     codedTmp = "0-+++-";
                     break;
-case "11000100": 
+                case "11000100":
                     codedTmp = "-+0++-";
-                    break;					
-case "11000101": 
+                    break;
+                case "11000101":
                     codedTmp = "+0--++";
-                    break;					
-case "11000110": 
-					codedTmp = "+0-+-+";
-                    break;					
-case "11000111": 
+                    break;
+                case "11000110":
+                    codedTmp = "+0-+-+";
+                    break;
+                case "11000111":
                     codedTmp = "+0-++-";
-                    break;					
-case "11001000": 
+                    break;
+                case "11001000":
                     codedTmp = "-+00+0";
                     break;
-case "11001001": 
+                case "11001001":
                     codedTmp = "0-++00";
                     break;
-case "11001010": 
+                case "11001010":
                     codedTmp = "0-+0+0";
                     break;
-case "11001011": 
+                case "11001011":
                     codedTmp = "0-+00+";
                     break;
-case "11001100": 
+                case "11001100":
                     codedTmp = "-+000+";
-                    break;					
-case "11001101": 
+                    break;
+                case "11001101":
                     codedTmp = "+0-+00";
-                    break;					
-case "11001110": 
+                    break;
+                case "11001110":
                     codedTmp = "+0-0+0";
-                    break;					
-case "11001111": 
+                    break;
+                case "11001111":
                     codedTmp = "+0-00+";
                     break;
-									
-					
-					
-case "11010000": 
+
+                case "11010000":
                     codedTmp = "+-0+-+";
                     break;
-case "11010001": 
+                case "11010001":
                     codedTmp = "0+--++";
                     break;
-case "11010010": 
+                case "11010010":
                     codedTmp = "0+-+-+";
                     break;
-case "11010011": 
+                case "11010011":
                     codedTmp = "0+-++-";
                     break;
-case "11010100": 
+                case "11010100":
                     codedTmp = "+-0++-";
-					break;					
-case "11010101": 
+                    break;
+                case "11010101":
                     codedTmp = "-0+-++";
-                    break;					
-case "11010110": 
+                    break;
+                case "11010110":
                     codedTmp = "-0++-+";
-                    break;					
-case "11010111": 
+                    break;
+                case "11010111":
                     codedTmp = "-0+++-";
-                    break;					
-case "11011000": 
+                    break;
+                case "11011000":
                     codedTmp = "+-00+0";
                     break;
-case "11011001": 
+                case "11011001":
                     codedTmp = "0+-+00";
                     break;
-case "11011010": 
+                case "11011010":
                     codedTmp = "0+-0+0";
                     break;
-case "11011011": 
+                case "11011011":
                     codedTmp = "0+-00+";
                     break;
-case "11011100": 
+                case "11011100":
                     codedTmp = "+-000+";
-                    break;					
-case "11011101": 
+                    break;
+                case "11011101":
                     codedTmp = "-0++00";
-                    break;					
-case "11011110": 
+                    break;
+                case "11011110":
                     codedTmp = "-0+0+0";
-                    break;					
-case "11011111": 
+                    break;
+                case "11011111":
                     codedTmp = "-0+00+";
                     break;
-				
 
-
-case "11100000": 
+                case "11100000":
                     codedTmp = "-++0-+";
                     break;
-case "11100001": 
+                case "11100001":
                     codedTmp = "+--++0";
                     break;
-case "11100010": 
+                case "11100010":
                     codedTmp = "+-+0-+";
                     break;
-case "11100011": 
+                case "11100011":
                     codedTmp = "+-++0-";
                     break;
-case "11100100": 
+                case "11100100":
                     codedTmp = "-+++0-";
-                    break;					
-case "11100101": 
+                    break;
+                case "11100101":
                     codedTmp = "++--+0";
-                    break;					
-case "11100110": 
+                    break;
+                case "11100110":
                     codedTmp = "++-0-+";
-                    break;					
-case "11100111": 
+                    break;
+                case "11100111":
                     codedTmp = "++-+0-";
-                    break;					
-case "11101000": 
+                    break;
+                case "11101000":
                     codedTmp = "-++0+-";
                     break;
-case "11101001": 
+                case "11101001":
                     codedTmp = "+-++-0";
                     break;
-case "11101010": 
-					codedTmp = "+-+0+-";
+                case "11101010":
+                    codedTmp = "+-+0+-";
                     break;
-case "11101011": 
-					codedTmp = "+-+-0+";
+                case "11101011":
+                    codedTmp = "+-+-0+";
                     break;
-case "11101100": 
+                case "11101100":
                     codedTmp = "-++-0+";
-                    break;					
-case "11101101": 
+                    break;
+                case "11101101":
                     codedTmp = "++-+-0";
-                    break;					
-case "11101110": 
+                    break;
+                case "11101110":
                     codedTmp = "++-0+-";
-                    break;					
-case "11101111": 
+                    break;
+                case "11101111":
                     codedTmp = "++--0+";
                     break;
-								
-					
-					
-case "11110000": 
+
+                case "11110000":
                     codedTmp = "+000-+";
                     break;
-case "11110001": 
+                case "11110001":
                     codedTmp = "0+0-+0";
                     break;
-case "11110010": 
+                case "11110010":
                     codedTmp = "0+00-+";
                     break;
-case "11110011": 
+                case "11110011":
                     codedTmp = "0+0+0-";
                     break;
-case "11110100": 
+                case "11110100":
                     codedTmp = "+00+0-";
-                    break;					
-case "11110101": 
+                    break;
+                case "11110101":
                     codedTmp = "00+-+0";
-                    break;					
-case "11110110": 
+                    break;
+                case "11110110":
                     codedTmp = "00+0-+";
-                    break;					
-case "11110111": 
+                    break;
+                case "11110111":
                     codedTmp = "00++0-";
-                    break;					
-case "11111000": 
+                    break;
+                case "11111000":
                     codedTmp = "+000+-";
                     break;
-case "11111001": 
+                case "11111001":
                     codedTmp = "0+0+-0";
                     break;
-case "11111010": 
+                case "11111010":
                     codedTmp = "0+00+-";
-					break;
-case "11111011": 
+                    break;
+                case "11111011":
                     codedTmp = "0+0-0+";
                     break;
-case "11111100": 
+                case "11111100":
                     codedTmp = "+00-0+";
-                    break;					
-case "11111101": 
-                   codedTmp = "00++-0";
-                    break;					
-case "11111110": 
+                    break;
+                case "11111101":
+                    codedTmp = "00++-0";
+                    break;
+                case "11111110":
                     codedTmp = "00+0+-";
-                    break;					
-case "11111111": 
+                    break;
+                case "11111111":
                     codedTmp = "00+-0+";
                     break;
-                    
+
                 default:
                     codedTmp = "";
             }
@@ -1255,7 +1251,7 @@ case "11111111":
         for (String codedByte : partes) {
 
             String codedByteFixed = "";
-            
+
             //retirando vazios da string
             for (int i = 0; i < codedByte.length(); i += 2) {
                 codedByteFixed += codedByte.charAt(i);
@@ -1266,198 +1262,198 @@ case "11111111":
                 case "-+00-+": //NUL
                     byteBinary = 0b00000000;
                     break;
-case "0-+-+0": //SOH
+                case "0-+-+0": //SOH
                     byteBinary = 0b00000001;
                     break;
-case "0-+0-+": //STX
+                case "0-+0-+": //STX
                     byteBinary = 0b00000010;
                     break;
-case "0-++0-": //ETX
+                case "0-++0-": //ETX
                     byteBinary = 0b00000011;
                     break;
-case "-+0+0-": //EOT
+                case "-+0+0-": //EOT
                     byteBinary = 0b00000100;
-                    break;					
-case "+0--+0": //ENQ
+                    break;
+                case "+0--+0": //ENQ
                     byteBinary = 0b00000101;
-                    break;					
-case "+0-0-+": //ACK
+                    break;
+                case "+0-0-+": //ACK
                     byteBinary = 0b00000110;
-                    break;					
-case "+0-+0-": //BEL
+                    break;
+                case "+0-+0-": //BEL
                     byteBinary = 0b00000111;
-                    break;					
-case "-+00+-": //BS
+                    break;
+                case "-+00+-": //BS
                     byteBinary = 0b00001000;
                     break;
-case "0-++-0": //HT
+                case "0-++-0": //HT
                     byteBinary = 0b00001001;
                     break;
-case "0-+0+-": //LF
+                case "0-+0+-": //LF
                     byteBinary = 0b00001010;
                     break;
-case "0-+-0+": //VT
+                case "0-+-0+": //VT
                     byteBinary = 0b00001011;
                     break;
-case "-+0-0+": //FF
+                case "-+0-0+": //FF
                     byteBinary = 0b00001100;
-                    break;					
-case "+0-+-0": //CR
+                    break;
+                case "+0-+-0": //CR
                     byteBinary = 0b00001101;
-                    break;					
-case "+0-0+-": //SO
+                    break;
+                case "+0-0+-": //SO
                     byteBinary = 0b00001110;
-                    break;					
-case "+0--0+": //SI
+                    break;
+                case "+0--0+": //SI
                     byteBinary = 0b00001111;
-                    break;			
-case "0--+0+": //DLE
+                    break;
+                case "0--+0+": //DLE
                     byteBinary = 0b00010000;
                     break;
-case "-0-0++": //DC1
+                case "-0-0++": //DC1
                     byteBinary = 0b00010001;
                     break;
-case "-0-+0+": //DC2
+                case "-0-+0+": //DC2
                     byteBinary = 0b00010010;
                     break;
-case "-0-++0": //DC3
+                case "-0-++0": //DC3
                     byteBinary = 0b00010011;
                     break;
-case "0--++0": //DC4
+                case "0--++0": //DC4
                     byteBinary = 0b00010100;
-                    break;					
-case "--00++": //NAK
+                    break;
+                case "--00++": //NAK
                     byteBinary = 0b00010101;
-                    break;					
-case "--0+0+": //SYN
+                    break;
+                case "--0+0+": //SYN
                     byteBinary = 0b00010110;
-                    break;					
-case "--0++0": //ETB
+                    break;
+                case "--0++0": //ETB
                     byteBinary = 0b00010111;
-                    break;					
-case "-+0-+0": //CAN
+                    break;
+                case "-+0-+0": //CAN
                     byteBinary = 0b00011000;
                     break;
-case "+-0-+0": //EM
+                case "+-0-+0": //EM
                     byteBinary = 0b00011001;
                     break;
-case "-++-+0": //SUB
+                case "-++-+0": //SUB
                     byteBinary = 0b00011010;
                     break;
-case "+00-+0": //ESC
+                case "+00-+0": //ESC
                     byteBinary = 0b00011011;
                     break;
-case "+00+-0": //FS
+                case "+00+-0": //FS
                     byteBinary = 0b00011100;
-                    break;					
-case "-+++-0": //GS
+                    break;
+                case "-+++-0": //GS
                     byteBinary = 0b00011101;
-                    break;					
-case "+-0+-0": //RS
+                    break;
+                case "+-0+-0": //RS
                     byteBinary = 0b00011110;
-                    break;					
-case "-+0+-0": //US
+                    break;
+                case "-+0+-0": //US
                     byteBinary = 0b00011111;
                     break;
-                
+
                 // de 32 a 64, simbolos
                 case "-++-00": //space
                     byteBinary = 0b00100000;
                     break;
-case "+00+--": //!
+                case "+00+--": //!
                     byteBinary = 0b00100001;
                     break;
-case "-+0-++": //"
+                case "-+0-++": //"
                     byteBinary = 0b00100010;
                     break;
-case "+-0-++": //#
+                case "+-0-++": //#
                     byteBinary = 0b00100011;
                     break;
-case "+-0+00": //$
+                case "+-0+00": //$
                     byteBinary = 0b00100100;
-                    break;					
-case "-+0+00": //%
+                    break;
+                case "-+0+00": //%
                     byteBinary = 0b00100101;
-                    break;					
-case "+00-00": //&
+                    break;
+                case "+00-00": //&
                     byteBinary = 0b00100110;
-                    break;					
-case "-+++--": //'
+                    break;
+                case "-+++--": //'
                     byteBinary = 0b00100111;
-                    break;					
-case "0++-0-": //(
+                    break;
+                case "0++-0-": //(
                     byteBinary = 0b00101000;
                     break;
-case "+0+0--": //)
+                case "+0+0--": //)
                     byteBinary = 0b00101001;
                     break;
-case "+0+-0-": //*
-					byteBinary = 0b00101010;
+                case "+0+-0-": //*
+                    byteBinary = 0b00101010;
                     break;
-case "+0+--0": //+
+                case "+0+--0": //+
                     byteBinary = 0b00101011;
                     break;
-case "0++--0": //`
+                case "0++--0": //`
                     byteBinary = 0b00101100;
-                    break;					
-case "++00--": //-
+                    break;
+                case "++00--": //-
                     byteBinary = 0b00101101;
-                    break;					
-case "++0-0-": //.
+                    break;
+                case "++0-0-": //.
                     byteBinary = 0b00101110;
-                    break;					
-case "++0--0": // /
+                    break;
+                case "++0--0": // /
                     byteBinary = 0b00101111;
-                    break;					
-case "+-00-+": //0
+                    break;
+                case "+-00-+": //0
                     byteBinary = 0b00110000;
                     break;
-case "0+--+0": //1
+                case "0+--+0": //1
                     byteBinary = 0b00110001;
                     break;
-case "0+-0-+": //2
+                case "0+-0-+": //2
                     byteBinary = 0b00110010;
                     break;
-case "0+-+0-": //3
+                case "0+-+0-": //3
                     byteBinary = 0b00110011;
                     break;
-case "+-0+0-": //4
+                case "+-0+0-": //4
                     byteBinary = 0b00110100;
-                    break;					
-case "-0+-+0": //5
+                    break;
+                case "-0+-+0": //5
                     byteBinary = 0b00110101;
-                    break;					
-case "-0+-+": //6
+                    break;
+                case "-0+-+": //6
                     byteBinary = 0b00110110;
-                    break;					
-case "-0++0-": //7
+                    break;
+                case "-0++0-": //7
                     byteBinary = 0b00110111;
-                    break;					
-case "+-00+-": //8
+                    break;
+                case "+-00+-": //8
                     byteBinary = 0b00111000;
                     break;
-case "0+-+-0": //9
+                case "0+-+-0": //9
                     byteBinary = 0b00111001;
                     break;
-case "0+-0+-": //:
+                case "0+-0+-": //:
                     byteBinary = 0b00111010;
                     break;
-case "0+--0+": //;
+                case "0+--0+": //;
                     byteBinary = 0b00111011;
                     break;
-case "+-0-0+": //<
+                case "+-0-0+": //<
                     byteBinary = 0b00111100;
-                    break;					
-case "-0++-0": //=
+                    break;
+                case "-0++-0": //=
                     byteBinary = 0b00111101;
-                    break;					
-case "-0+0+-": //>
+                    break;
+                case "-0+0+-": //>
                     byteBinary = 0b00111110;
-                    break;					
-case "-0+-0+": //?
+                    break;
+                case "-0+-0+": //?
                     byteBinary = 0b00111111;
-                    break;					
-case "-00+0+": //@
+                    break;
+                case "-00+0+": //@
                     byteBinary = 0b01000000;
                     break;
 
@@ -1465,589 +1461,588 @@ case "-00+0+": //@
                 case "0-00++": //A
                     byteBinary = 0b01000001;
                     break;
-case "0-0+0+": //B
+                case "0-0+0+": //B
                     byteBinary = 0b01000010;
                     break;
-case "0-0++0": //C
+                case "0-0++0": //C
                     byteBinary = 0b01000011;
                     break;
-case "-00++0": //D
+                case "-00++0": //D
                     byteBinary = 0b01000100;
-                    break;					
-case "00-0++": //E
+                    break;
+                case "00-0++": //E
                     byteBinary = 0b01000101;
-                    break;					
-case "00-+0+": //F
+                    break;
+                case "00-+0+": //F
                     byteBinary = 0b01000110;
-                    break;					
-case "00-++0": //G
+                    break;
+                case "00-++0": //G
                     byteBinary = 0b01000111;
-                    break;					
-case "00+000": //H
+                    break;
+                case "00+000": //H
                     byteBinary = 0b01001000;
                     break;
-case "++-000": //I
+                case "++-000": //I
                     byteBinary = 0b01001001;
                     break;
-case "+-+000": //J
+                case "+-+000": //J
                     byteBinary = 0b01001010;
                     break;
-case "-++000": //K
+                case "-++000": //K
                     byteBinary = 0b01001011;
                     break;
-case "0+-000": //L
+                case "0+-000": //L
                     byteBinary = 0b01001100;
-                    break;					
-case "+0-000": //M
+                    break;
+                case "+0-000": //M
                     byteBinary = 0b01001101;
-                    break;					
-case "0-+000": //N
+                    break;
+                case "0-+000": //N
                     byteBinary = 0b01001110;
-                    break;					
-case "-0+000": //O
+                    break;
+                case "-0+000": //O
                     byteBinary = 0b01001111;
-                    break;				
-case "+--+0+": //P
+                    break;
+                case "+--+0+": //P
                     byteBinary = 0b01010000;
                     break;
-case "-+-0++": //Q
+                case "-+-0++": //Q
                     byteBinary = 0b01010001;
                     break;
-case "-+-+0+": //R
+                case "-+-+0+": //R
                     byteBinary = 0b01010010;
                     break;
-case "-+-++0": //S
+                case "-+-++0": //S
                     byteBinary = 0b01010011;
                     break;
-case "+--++0": //T
+                case "+--++0": //T
                     byteBinary = 0b01010100;
-                    break;					
-case "--+0++": //U
+                    break;
+                case "--+0++": //U
                     byteBinary = 0b01010101;
-                    break;					
-case "--++0+": //V
+                    break;
+                case "--++0+": //V
                     byteBinary = 0b01010110;
-                    break;					
-case "--+++0": //W
+                    break;
+                case "--+++0": //W
                     byteBinary = 0b01010111;
-                    break;					
-case "--0+++": //X
+                    break;
+                case "--0+++": //X
                     byteBinary = 0b01011000;
                     break;
-case "-0-+++": //Y
+                case "-0-+++": //Y
                     byteBinary = 0b01011001;
                     break;
-case "0--+++": //Z
+                case "0--+++": //Z
                     byteBinary = 0b01011010;
                     break;
-                
+
                 //mais simbolos
                 case "0--0++": //[
                     byteBinary = 0b01011011;
                     break;
-case "+--0++": //\
+                case "+--0++": //\
                     byteBinary = 0b01011100;
-                    break;					
-case "-000++": //]
+                    break;
+                case "-000++": //]
                     byteBinary = 0b01011101;
-                    break;					
-case "0+++--": //^
+                    break;
+                case "0+++--": //^
                     byteBinary = 0b01011110;
-                    break;					
-case "0++-00": //_
+                    break;
+                case "0++-00": //_
                     byteBinary = 0b01011111;
                     break;
-case "0++0-0": //`
+                case "0++0-0": //`
                     byteBinary = 0b01100000;
                     break;
-                
+
                 // letras minusculas
                 case "+0+-00": //a
                     byteBinary = 0b01100001;
                     break;
-case "+0+0-0": //b
+                case "+0+0-0": //b
                     byteBinary = 0b01100010;
                     break;
-case "+0+00-": //c
+                case "+0+00-": //c
                     byteBinary = 0b01100011;
                     break;
-case "0++00-": //d
+                case "0++00-": //d
                     byteBinary = 0b01100100;
-                    break;					
-case "++0-00": //e
+                    break;
+                case "++0-00": //e
                     byteBinary = 0b01100101;
-                    break;					
-case "++00-0": //f
+                    break;
+                case "++00-0": //f
                     byteBinary = 0b01100110;
-                    break;					
-case "++000-": //g
+                    break;
+                case "++000-": //g
                     byteBinary = 0b01100111;
-                    break;					
-case "0++-+-": //h
+                    break;
+                case "0++-+-": //h
                     byteBinary = 0b01101000;
                     break;
-case "+0++--": //i
+                case "+0++--": //i
                     byteBinary = 0b01101001;
                     break;
-case "+0+-+-": //j
-					byteBinary = 0b01101010;
+                case "+0+-+-": //j
+                    byteBinary = 0b01101010;
                     break;
-case "+0+--+": //k
+                case "+0+--+": //k
                     byteBinary = 0b01101011;
                     break;
-case "0++--+": //l
+                case "0++--+": //l
                     byteBinary = 0b01101100;
-                    break;					
-case "++0+--": //m
+                    break;
+                case "++0+--": //m
                     byteBinary = 0b01101101;
-                    break;					
-case "++0-+-": //n
+                    break;
+                case "++0-+-": //n
                     byteBinary = 0b01101110;
-                    break;					
-case "++0--+": //o
+                    break;
+                case "++0--+": //o
                     byteBinary = 0b01101111;
-                    break;					
-case "000++-": //p
+                    break;
+                case "000++-": //p
                     byteBinary = 0b01110000;
                     break;
-case "000+-+": //q
+                case "000+-+": //q
                     byteBinary = 0b01110001;
                     break;
-case "000-++": //r
+                case "000-++": //r
                     byteBinary = 0b01110010;
                     break;
-case "000+00": //s
+                case "000+00": //s
                     byteBinary = 0b01110011;
                     break;
-case "000+0-": //t
+                case "000+0-": //t
                     byteBinary = 0b01110100;
-                    break;					
-case "000+-0": //u
+                    break;
+                case "000+-0": //u
                     byteBinary = 0b01110101;
-                    break;					
-case "000-0+": //v
+                    break;
+                case "000-0+": //v
                     byteBinary = 0b01110110;
-                    break;					
-case "000-+0": //w
+                    break;
+                case "000-+0": //w
                     byteBinary = 0b01110111;
-                    break;					
-case "+++--0": //x
+                    break;
+                case "+++--0": //x
                     byteBinary = 0b01111000;
                     break;
-case "+++-0-": //y
+                case "+++-0-": //y
                     byteBinary = 0b01111001;
                     break;
-case "+++0--": //z
+                case "+++0--": //z
                     byteBinary = 0b01111010;
                     break;
-                
+
                 //simbolos finais
                 case "0++0--": //{
                     byteBinary = 0b01111011;
                     break;
-case "-00-++": //|
+                case "-00-++": //|
                     byteBinary = 0b01111100;
-                    break;					
-case "-00+00": //}
-					byteBinary = 0b01111101;
-                    break;					
-case "+---++": //~
+                    break;
+                case "-00+00": //}
+                    byteBinary = 0b01111101;
+                    break;
+                case "+---++": //~
                     byteBinary = 0b01111110;
-                    break;					
-case "+--+00": //DEL
+                    break;
+                case "+--+00": //DEL
                     byteBinary = 0b01111111;
                     break;
-                
+
                 //tabela estendida
                 case "-00+-+":
                     byteBinary = (byte) 0b10000000;
                     break;
-case "0-0-++":
+                case "0-0-++":
                     byteBinary = (byte) 0b10000001;
                     break;
-case "0-0+-+":
+                case "0-0+-+":
                     byteBinary = (byte) 0b10000010;
                     break;
-case "0-0++-": 
+                case "0-0++-":
                     byteBinary = (byte) 0b10000011;
                     break;
-case "-00++-": 
+                case "-00++-":
                     byteBinary = (byte) 0b10000100;
-                    break;					
-case "00--++": 
+                    break;
+                case "00--++":
                     byteBinary = (byte) 0b10000101;
-                    break;					
-case "00-+-+": 
+                    break;
+                case "00-+-+":
                     byteBinary = (byte) 0b10000110;
-                    break;					
-case "00-++-": 
+                    break;
+                case "00-++-":
                     byteBinary = (byte) 0b10000111;
-                    break;					
-case "-000+0": 
+                    break;
+                case "-000+0":
                     byteBinary = (byte) 0b10001000;
                     break;
-case "0-0+00": 
+                case "0-0+00":
                     byteBinary = (byte) 0b10001001;
                     break;
-case "0-00+0": 
+                case "0-00+0":
                     byteBinary = (byte) 0b10001010;
                     break;
-case "0-000+": 
+                case "0-000+":
                     byteBinary = (byte) 0b10001011;
                     break;
-case "-0000+": 
+                case "-0000+":
                     byteBinary = (byte) 0b10001100;
-                    break;					
-case "00-+00": 
+                    break;
+                case "00-+00":
                     byteBinary = (byte) 0b10001101;
-                    break;					
-case "00-0+0": 
+                    break;
+                case "00-0+0":
                     byteBinary = (byte) 0b10001110;
-                    break;					
-case "00-00+": 
+                    break;
+                case "00-00+":
                     byteBinary = (byte) 0b10001111;
-                    break;									
-case "+--+-+": 
+                    break;
+                case "+--+-+":
                     byteBinary = (byte) 0b10010000;
                     break;
-case "-+--++": 
+                case "-+--++":
                     byteBinary = (byte) 0b10010001;
                     break;
-case "-+-+-+": 
+                case "-+-+-+":
                     byteBinary = (byte) 0b10010010;
                     break;
-case "-+-++-": 
+                case "-+-++-":
                     byteBinary = (byte) 0b10010011;
                     break;
-case "+--++-": 
+                case "+--++-":
                     byteBinary = (byte) 0b10010100;
-                    break;					
-case "--+-++": 
+                    break;
+                case "--+-++":
                     byteBinary = (byte) 0b10010101;
-                    break;					
-case "--++-+": 
+                    break;
+                case "--++-+":
                     byteBinary = (byte) 0b10010110;
-                    break;					
-case "--+++-": 
+                    break;
+                case "--+++-":
                     byteBinary = (byte) 0b10010111;
-                    break;					
-case "+--0+0": 
+                    break;
+                case "+--0+0":
                     byteBinary = (byte) 0b10011000;
                     break;
-case "-+-+00": 
+                case "-+-+00":
                     byteBinary = (byte) 0b10011001;
                     break;
-case "-+-0+0": 
+                case "-+-0+0":
                     byteBinary = (byte) 0b10011010;
                     break;
-case "-+-00+": 
+                case "-+-00+":
                     byteBinary = (byte) 0b10011011;
                     break;
-case "+--00+": 
+                case "+--00+":
                     byteBinary = (byte) 0b10011100;
-                    break;					
-case "--++00": 
+                    break;
+                case "--++00":
                     byteBinary = (byte) 0b10011101;
-					break;					
-case "--+0+0": 
+                    break;
+                case "--+0+0":
                     byteBinary = (byte) 0b10011110;
-                    break;					
-case "--+00+": 
+                    break;
+                case "--+00+":
                     byteBinary = (byte) 0b10011111;
                     break;
-case "-++0-0": 
+                case "-++0-0":
                     byteBinary = (byte) 0b10100000;
                     break;
-case "+-+-00": 
+                case "+-+-00":
                     byteBinary = (byte) 0b10100001;
                     break;
-case "+-+0-0": 
+                case "+-+0-0":
                     byteBinary = (byte) 0b10100010;
                     break;
-case "+-+00-": 
+                case "+-+00-":
                     byteBinary = (byte) 0b10100011;
                     break;
-case "-++00-": 
+                case "-++00-":
                     byteBinary = (byte) 0b10100100;
-                    break;					
-case "++--00": 
+                    break;
+                case "++--00":
                     byteBinary = (byte) 0b10100101;
-                    break;					
-case "++-0-0": 
+                    break;
+                case "++-0-0":
                     byteBinary = (byte) 0b10100110;
-                    break;					
-case "++-00-": 
+                    break;
+                case "++-00-":
                     byteBinary = (byte) 0b10100111;
-                    break;					
-case "-++-+-": 
+                    break;
+                case "-++-+-":
                     byteBinary = (byte) 0b10101000;
                     break;
-case "+-++--": 
+                case "+-++--":
                     byteBinary = (byte) 0b10101001;
                     break;
-case "+-+-+-": 
-					byteBinary = (byte) 0b10101010;
+                case "+-+-+-":
+                    byteBinary = (byte) 0b10101010;
                     break;
-case "+-+--+": 
-					byteBinary = (byte) 0b10101011;
+                case "+-+--+":
+                    byteBinary = (byte) 0b10101011;
                     break;
-case "-++--+": 
+                case "-++--+":
                     byteBinary = (byte) 0b10101100;
-                    break;					
-case "++-+--": 
+                    break;
+                case "++-+--":
                     byteBinary = (byte) 0b10101101;
-                    break;					
-case "++--+-": 
+                    break;
+                case "++--+-":
                     byteBinary = (byte) 0b10101110;
-                    break;					
-case "++---+": 
+                    break;
+                case "++---+":
                     byteBinary = (byte) 0b10101111;
-                    break;					
-case "+000-0": 
+                    break;
+                case "+000-0":
                     byteBinary = (byte) 0b10110000;
                     break;
-case "0+0-00": 
+                case "0+0-00":
                     byteBinary = (byte) 0b10110001;
                     break;
-case "0+00-0": 
+                case "0+00-0":
                     byteBinary = (byte) 0b10110010;
                     break;
-case "0+000-": 
+                case "0+000-":
                     byteBinary = (byte) 0b10110011;
                     break;
-case "-0000-": 
-					byteBinary = (byte) 0b10110100;
-                    break;					
-case "00+-00": 
+                case "-0000-":
+                    byteBinary = (byte) 0b10110100;
+                    break;
+                case "00+-00":
                     byteBinary = (byte) 0b10110101;
-                    break;					
-case "00+0-0": 
+                    break;
+                case "00+0-0":
                     byteBinary = (byte) 0b10110110;
-                    break;					
-case "00+00-": 
+                    break;
+                case "00+00-":
                     byteBinary = (byte) 0b10110111;
-                    break;					
-case "+00-+-": 
+                    break;
+                case "+00-+-":
                     byteBinary = (byte) 0b10111000;
                     break;
-case "0+0+--": 
+                case "0+0+--":
                     byteBinary = (byte) 0b10111001;
                     break;
-case "0+0-+-": 
-					byteBinary = (byte) 0b10111010;
+                case "0+0-+-":
+                    byteBinary = (byte) 0b10111010;
                     break;
-case "0+0--+": 
+                case "0+0--+":
                     byteBinary = (byte) 0b10111011;
                     break;
-case "+00--+": 
+                case "+00--+":
                     byteBinary = (byte) 0b10111100;
-                    break;					
-case "00++--": 
+                    break;
+                case "00++--":
                     byteBinary = (byte) 0b10111101;
-                    break;					
-case "00+-+-": 
+                    break;
+                case "00+-+-":
                     byteBinary = (byte) 0b10111110;
-                    break;					
-case "00+--+": 
+                    break;
+                case "00+--+":
                     byteBinary = (byte) 0b10111111;
-                    break;				
-case "-+0+-+": 
+                    break;
+                case "-+0+-+":
                     byteBinary = (byte) 0b11000000;
                     break;
-case "0-+-++": 
+                case "0-+-++":
                     byteBinary = (byte) 0b11000001;
                     break;
-case "0-++-+": 
+                case "0-++-+":
                     byteBinary = (byte) 0b11000010;
                     break;
-case "0-+++-": 
+                case "0-+++-":
                     byteBinary = (byte) 0b11000011;
                     break;
-case "-+0++-": 
+                case "-+0++-":
                     byteBinary = (byte) 0b11000100;
-                    break;					
-case "+0--++": 
+                    break;
+                case "+0--++":
                     byteBinary = (byte) 0b11000101;
-                    break;					
-case "+0-+-+": 
-					byteBinary = (byte) 0b11000110;
-                    break;					
-case "+0-++-": 
+                    break;
+                case "+0-+-+":
+                    byteBinary = (byte) 0b11000110;
+                    break;
+                case "+0-++-":
                     byteBinary = (byte) 0b11000111;
-                    break;					
-case "-+00+0": 
+                    break;
+                case "-+00+0":
                     byteBinary = (byte) 0b11001000;
                     break;
-case "0-++00": 
+                case "0-++00":
                     byteBinary = (byte) 0b11001001;
                     break;
-case "0-+0+0": 
+                case "0-+0+0":
                     byteBinary = (byte) 0b11001010;
                     break;
-case "0-+00+": 
+                case "0-+00+":
                     byteBinary = (byte) 0b11001011;
                     break;
-case "-+000+": 
+                case "-+000+":
                     byteBinary = (byte) 0b11001100;
-                    break;					
-case "+0-+00": 
+                    break;
+                case "+0-+00":
                     byteBinary = (byte) 0b11001101;
-                    break;					
-case "+0-0+0": 
+                    break;
+                case "+0-0+0":
                     byteBinary = (byte) 0b11001110;
-                    break;					
-case "+0-00+": 
+                    break;
+                case "+0-00+":
                     byteBinary = (byte) 0b11001111;
-                    break;	
-case "+-0+-+": 
+                    break;
+                case "+-0+-+":
                     byteBinary = (byte) 0b11010000;
                     break;
-case "0+--++": 
+                case "0+--++":
                     byteBinary = (byte) 0b11010001;
                     break;
-case "0+-+-+": 
+                case "0+-+-+":
                     byteBinary = (byte) 0b11010010;
                     break;
-case "0+-++-": 
+                case "0+-++-":
                     byteBinary = (byte) 0b11010011;
                     break;
-case "+-0++-": 
+                case "+-0++-":
                     byteBinary = (byte) 0b11010100;
-					break;					
-case "-0+-++": 
+                    break;
+                case "-0+-++":
                     byteBinary = (byte) 0b11010101;
-                    break;					
-case "-0++-+": 
+                    break;
+                case "-0++-+":
                     byteBinary = (byte) 0b11010110;
-                    break;					
-case "-0+++-": 
+                    break;
+                case "-0+++-":
                     byteBinary = (byte) 0b11010111;
-                    break;					
-case "+-00+0": 
+                    break;
+                case "+-00+0":
                     byteBinary = (byte) 0b11011000;
                     break;
-case "0+-+00": 
+                case "0+-+00":
                     byteBinary = (byte) 0b11011001;
                     break;
-case "0+-0+0": 
+                case "0+-0+0":
                     byteBinary = (byte) 0b11011010;
                     break;
-case "0+-00+": 
+                case "0+-00+":
                     byteBinary = (byte) 0b11011011;
                     break;
-case "+-000+": 
+                case "+-000+":
                     byteBinary = (byte) 0b11011100;
-                    break;					
-case "-0++00": 
+                    break;
+                case "-0++00":
                     byteBinary = (byte) 0b11011101;
-                    break;					
-case "-0+0+0": 
+                    break;
+                case "-0+0+0":
                     byteBinary = (byte) 0b11011110;
-                    break;					
-case "-0+00+": 
+                    break;
+                case "-0+00+":
                     byteBinary = (byte) 0b11011111;
                     break;
-case "-++0-+": 
+                case "-++0-+":
                     byteBinary = (byte) 0b11100000;
                     break;
-case "+-+-+0": 
+                case "+-+-+0":
                     byteBinary = (byte) 0b11100001;
                     break;
-case "+-+0-+": 
+                case "+-+0-+":
                     byteBinary = (byte) 0b11100010;
                     break;
-case "+-++0-": 
+                case "+-++0-":
                     byteBinary = (byte) 0b11100011;
                     break;
-case "-+++0-": 
+                case "-+++0-":
                     byteBinary = (byte) 0b11100100;
-                    break;					
-case "++--+0": 
+                    break;
+                case "++--+0":
                     byteBinary = (byte) 0b11100101;
-                    break;					
-case "++-0-+": 
+                    break;
+                case "++-0-+":
                     byteBinary = (byte) 0b11100110;
-                    break;					
-case "++-+0-": 
+                    break;
+                case "++-+0-":
                     byteBinary = (byte) 0b11100111;
-                    break;					
-case "-++0+-": 
+                    break;
+                case "-++0+-":
                     byteBinary = (byte) 0b11101000;
                     break;
-case "+-++-0": 
+                case "+-++-0":
                     byteBinary = (byte) 0b11101001;
                     break;
-case "+-+0+-": 
-					byteBinary = (byte) 0b11101010;
+                case "+-+0+-":
+                    byteBinary = (byte) 0b11101010;
                     break;
-case "+-+-0+": 
-					byteBinary = (byte) 0b11101011;
+                case "+-+-0+":
+                    byteBinary = (byte) 0b11101011;
                     break;
-case "-++-0+": 
+                case "-++-0+":
                     byteBinary = (byte) 0b11101100;
-                    break;					
-case "++-+-0": 
+                    break;
+                case "++-+-0":
                     byteBinary = (byte) 0b11101101;
-                    break;					
-case "++-0+-": 
+                    break;
+                case "++-0+-":
                     byteBinary = (byte) 0b11101110;
-                    break;					
-case "++--0+": 
+                    break;
+                case "++--0+":
                     byteBinary = (byte) 0b11101111;
                     break;
-case "+000-+": 
+                case "+000-+":
                     byteBinary = (byte) 0b11110000;
                     break;
-case "0+0-+0": 
+                case "0+0-+0":
                     byteBinary = (byte) 0b11110001;
                     break;
-case "0+00-+": 
+                case "0+00-+":
                     byteBinary = (byte) 0b11110010;
                     break;
-case "0+0+0-": 
+                case "0+0+0-":
                     byteBinary = (byte) 0b11110011;
                     break;
-case "+00+0-": 
+                case "+00+0-":
                     byteBinary = (byte) 0b11110100;
-                    break;					
-case "00+-+0": 
+                    break;
+                case "00+-+0":
                     byteBinary = (byte) 0b11110101;
-                    break;					
-case "00+0-+": 
+                    break;
+                case "00+0-+":
                     byteBinary = (byte) 0b11110110;
-                    break;					
-case "00++0-": 
+                    break;
+                case "00++0-":
                     byteBinary = (byte) 0b11110111;
-                    break;					
-case "+000+-": 
+                    break;
+                case "+000+-":
                     byteBinary = (byte) 0b11111000;
                     break;
-case "0+0+-0": 
+                case "0+0+-0":
                     byteBinary = (byte) 0b11111001;
                     break;
-case "0+00+-": 
+                case "0+00+-":
                     byteBinary = (byte) 0b11111010;
-					break;
-case "0+0-0+": 
+                    break;
+                case "0+0-0+":
                     byteBinary = (byte) 0b11111011;
                     break;
-case "+00-0+": 
+                case "+00-0+":
                     byteBinary = (byte) 0b11111100;
-                    break;					
-case "00++-0": 
-					byteBinary = (byte) 0b11111101;
-                    break;					
-case "00+0+-": 
+                    break;
+                case "00++-0":
+                    byteBinary = (byte) 0b11111101;
+                    break;
+                case "00+0+-":
                     byteBinary = (byte) 0b11111110;
-                    break;					
-case "00+-0+": 
+                    break;
+                case "00+-0+":
                     byteBinary = (byte) 0b11111111;
                     break;
-                
 
                 default:
                     byteBinary = 0b00100000;   //espaco
-                    
+
                     ///codigos para debug abaixo
                     System.out.println("Não entendi o codigo |" + codedByteFixed + "|");
                     if (codedByteFixed.equals("+0+-00")) {
@@ -2056,21 +2051,21 @@ case "00+-0+":
                         System.out.println(codedByteFixed + " e " + "+0+-00" + " são " + codedByteFixed.compareTo("+0+-00"));
                     }
                     System.out.print("recebido: ");
-                    for (byte b : codedByteFixed.getBytes("UTF-8")) {
+                    for (byte b : codedByteFixed.getBytes("cp437")) {
                         System.out.println(Integer.toBinaryString(b));
                     }
                     System.out.println("letra a : ");
-                    for (byte b : "+0+-00".getBytes("UTF-8")) {
+                    for (byte b : "+0+-00".getBytes("cp437")) {
                         System.out.println(Integer.toBinaryString(b));
                     }
-                    ///
+                ///
             }
 
             emBytesSteam.write(byteBinary);
 
         }
         emBytes = emBytesSteam.toByteArray();
-        descodificada += new String(emBytes, UTF_8);
+        descodificada += new String(emBytes, "cp437");
 
         System.out.println(">descodificado " + descodificada);
         return descodificada;
